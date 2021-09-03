@@ -31,9 +31,12 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "state-lib",
+  "name": "@JoseAVallejo12/state-lib",
   "author": "Jose Vallejo",
   "module": "dist/state-lib.esm.js",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "size-limit": [
     {
       "path": "dist/state-lib.cjs.production.min.js",
