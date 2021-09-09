@@ -6,15 +6,53 @@ export const sum = (a: number, b: number) => {
 };
 
 export function createStore() {
-  if (!(<any>window)['storeMicrofrontend']) {
-    (<any>window as any)['storeMicrofrontend'] = {
+  if (!(window as any)['storeMicrofrontend']) {
+    ((<any>window) as any)['storeMicrofrontend'] = {
       mfe1: {},
       mfe2: {},
-      mfe3: {}
-    }
+      mfe3: {},
+    };
   }
 }
 
 export function getGlobalStore() {
-  return   window['storeMicrofrontend']
+  return (window as any)['storeMicrofrontend'];
+}
+
+interface GlobalState {
+  mfe1: object;
+  mfe2: object;
+  mfe3: object;
+  shell: object;
+}
+
+export class ManageState {
+  private static instance: ManageState;
+  private globalState: GlobalState;
+
+  private constructor() {
+    this.globalState = {
+      mfe1: {},
+      mfe2: {},
+      mfe3: {},
+      shell: {},
+    };
+  }
+
+  public static getInstance(): ManageState {
+    if (!ManageState.instance) {
+      ManageState.instance = new ManageState();
+    }
+
+    return ManageState.instance;
+  }
+
+  getGlobalStore (): GlobalState {
+    return this.globalState
+  }
+
+  setGlobalStore(key: keyof GlobalState, payload: object={}): void {
+    this.globalState[key] = payload
+  }
+
 }
