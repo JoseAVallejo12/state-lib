@@ -41,9 +41,14 @@ export class ManageState {
 
   public static getInstance(): ManageState {
     console.log('console log metodo getInstance', ManageState.instance);
-    if (!ManageState.instance) {
-      console.log('entrando a crear instancia');
-      ManageState.instance = new ManageState();
+
+    if (!(window as any)['globalStateManager']){
+      if (!ManageState.instance) {
+        ManageState.instance = new ManageState();
+        (window as any)['globalStateManager'] = ManageState.instance
+      }
+    } else {
+      ManageState.instance = (window as any)['globalStateManager']
     }
 
     return ManageState.instance;
