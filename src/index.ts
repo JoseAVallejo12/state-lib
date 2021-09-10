@@ -40,7 +40,9 @@ export class ManageState {
   }
 
   public static getInstance(): ManageState {
+    console.log('console log metodo getInstance', ManageState.instance);
     if (!ManageState.instance) {
+      console.log('entrando a crear instancia');
       ManageState.instance = new ManageState();
     }
 
